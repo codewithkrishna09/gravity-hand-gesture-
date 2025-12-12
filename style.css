@@ -1,0 +1,51 @@
+body {
+  height: 100%;
+  margin: 0;
+  background: #050505;
+  font-family: Inter, sans-serif;
+  overflow: hidden;
+}
+#canvas-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+#video-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+.glass-panel {
+  background: rgba(18, 18, 18, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.btn-option {
+  transition: all 0.22s ease;
+}
+.btn-option:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.04);
+}
+.btn-option.active {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+}
+#loading-screen {
+  z-index: 60;
+}
+#camera-debug {
+  width: 360px;
+  height: 270px;
+  transform: scaleX(-1);
+}
+@media (max-width: 640px) {
+  #camera-debug {
+    width: 220px;
+    height: 165px;
+  }
+}

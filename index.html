@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Gesture Controlled 3D Particles — Name & Shapes</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Loading -->
+    <div
+      id="loading-screen"
+      class="fixed inset-0 flex items-center justify-center z-50 text-white"
+    >
+      <div class="text-center">
+        <div
+          class="animate-spin rounded-full h-14 w-14 border-t-2 border-b-2 border-purple-500 mb-4"
+        ></div>
+        <div class="text-sm tracking-wider">
+          INITIALIZING VISION — Allow camera
+        </div>
+      </div>
+    </div>
+
+    <!-- Video -->
+    <video id="video-input" autoplay playsinline></video>
+
+    <!-- Canvas -->
+    <div id="canvas-container"></div>
+
+    <!-- UI Overlay -->
+    <div
+      class="fixed inset-0 pointer-events-none z-40 p-4 flex flex-col justify-between"
+    >
+      <div class="flex justify-between pointer-events-auto">
+        <div class="glass-panel rounded-xl p-3 flex items-center gap-3">
+          <div
+            id="status-dot"
+            class="w-2 h-2 rounded-full bg-red-500 animate-pulse"
+          ></div>
+          <div>
+            <div class="text-white text-sm font-semibold tracking-wide">
+              KINETIC PARTICLES
+            </div>
+            <div id="status-text" class="text-xs text-gray-300">
+              Waiting for hands...
+            </div>
+          </div>
+        </div>
+        <div class="glass-panel rounded-xl p-2 flex items-center gap-2">
+          <!-- <input
+            id="name-input"
+            type="text"
+            placeholder="Type Name"
+            class="rounded p-1 text-black text-sm"
+          /> -->
+          <!-- <button
+            onclick="app.generateNameShape()"
+            class="glass-panel rounded px-2 py-1 text-xs"
+          >
+            Set Name
+          </button> -->
+        </div>
+      </div>
+
+      <div class="flex items-center justify-center pointer-events-auto mb-4">
+        <div
+          class="glass-panel rounded-2xl p-2 flex gap-3 overflow-x-auto max-w-full"
+        >
+          <button
+            onclick="app.setTemplate('hearts')"
+            class="btn-option active w-16 h-16 rounded-xl flex flex-col items-center justify-center"
+          >
+            <i data-lucide="heart" class="text-white mb-1"></i>
+            <div class="text-[10px] text-gray-300">Heart</div>
+          </button>
+          <button
+            onclick="app.setTemplate('saturn')"
+            class="btn-option w-16 h-16 rounded-xl flex flex-col items-center justify-center"
+          >
+            <i data-lucide="orbit" class="text-white mb-1"></i>
+            <div class="text-[10px] text-gray-300">Saturn</div>
+          </button>
+          <button
+            onclick="app.setTemplate('flowers')"
+            class="btn-option w-16 h-16 rounded-xl flex flex-col items-center justify-center"
+          >
+            <i data-lucide="flower-2" class="text-white mb-1"></i>
+            <div class="text-[10px] text-gray-300">Flower</div>
+          </button>
+          <button
+            onclick="app.setTemplate('galaxy')"
+            class="btn-option w-16 h-16 rounded-xl flex flex-col items-center justify-center"
+          >
+            <i data-lucide="star" class="text-white mb-1"></i>
+            <div class="text-[10px] text-gray-300">Galaxy</div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pointer-events-auto fixed bottom-4 right-4 z-50">
+      <div
+        class="glass-panel rounded-lg overflow-hidden border border-gray-700 p-1"
+      >
+        <canvas id="camera-debug"></canvas>
+        <div
+          class="text-[10px] text-white bg-black/40 px-1 rounded absolute bottom-6 right-6"
+        >
+          DEBUG VIEW
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
